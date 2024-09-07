@@ -14,7 +14,7 @@ const WelcomePage = () => {
 
                 </p>
 
-                <button>Start the Lie</button>
+                <button className="main-button">Start the Lie</button>
 
             </div>
         </>
