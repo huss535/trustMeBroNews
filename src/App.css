@@ -1,0 +1,98 @@
+.nav-bar {
+  background-color: #013366;
+  height: 80px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+
+}
+
+.nav-bar::before {
+  content: "";
+  display: block;
+  background-color: #C20017;
+  height: 20px;
+  width: 100vw;
+}
+
+nav img {
+  width: 150px;
+  height: 150px;
+  margin-inline-start: 30px;
+}
+
+.page-body {
+  display: "flex";
+  justify-content: center;
+  align-items: center;
+  margin-top: 200px;
+  text-align: center;
+}
+
+p {
+  line-height: 4;
+}
+
+h1 {
+  font-size: 45px;
+}
+
+button {
+  position: relative;
+  font-size: 20px;
+  background-color: #C20017;
+  color: aliceblue;
+  border: none;
+  padding-inline: 45px;
+  padding-block: 20px;
+
+  transition: 0.5s ease;
+  /* Smooth transition for button changes */
+  width: 250px;
+  /* Initial button width */
+  overflow: hidden;
+  /* Prevents arrow from showing before hover */
+
+}
+
+button:hover::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  background-color: #E3E3E3;
+  width: 60px;
+  height: 100%;
+}
+
+button::after {
+  position: absolute;
+  content: "";
+  background-image: url("src/assets/reshot-icon-arrow-right-QC8ZV9TSGD.svg");
+  background-size: contain;
+  /* Ensure the icon fits */
+  background-repeat: no-repeat;
+  right: -50px;
+  /* Start position outside the button */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  /* Fixed width for the arrow icon */
+  height: 40px;
+  /* Fixed height for the arrow icon */
+  transition: right 0.5s ease;
+  /* Smooth transition for arrow movement */
+}
+
+button:hover {
+  cursor: pointer;
+  width: 350px;
+  /* Expanded button width on hover */
+}
+
+
+button:hover::after {
+  right: 20px;
+  /* Move arrow into view on hover */
+}
