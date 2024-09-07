@@ -31,15 +31,23 @@ nav img {
   text-align: center;
 }
 
+
 .article {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   border-block: solid 0.5px;
   width: 450px;
   height: 500px;
   /* Add some height for the article to be visible */
   margin: 20px;
+}
+
+.article img {
+  width: 100%;
+  height: 60%;
+  border-radius: 4px;
 }
 
 p {
@@ -107,4 +115,29 @@ h1 {
 .main-button:hover::after {
   right: 20px;
   /* Move arrow into view on hover */
+}
+
+.article-button {
+  color: #E3E3E3;
+  border: none;
+  padding-inline: 35px;
+  padding-block: 10px;
+  margin-inline: 10px;
+  margin-bottom: 10px;
+  border-radius: 20px;
+
+
+}
+
+.article-button:hover {
+  cursor: pointer;
+}
+
+.true-button {
+  background-color: #013366;
+
+}
+
+.fake-button {
+  background-color: #C20017;
 }
