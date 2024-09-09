@@ -1,4 +1,4 @@
-interface newsData {
+interface NewsData {
     title: string,
     body: string,
     imageUrl: string;
@@ -7,6 +7,8 @@ interface newsData {
 
 
 interface newsContextType {
-    articles: newsData[],
+    articles: NewsData[],
     getArticles: () => void,
 }
+
+export default NewsData;
