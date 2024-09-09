@@ -2,7 +2,8 @@
 interface article {
     imageUrl: string,
     title: string,
-    isReal: boolean
+    isReal: boolean,
+    id?: string
 }
 
 
@@ -13,7 +14,7 @@ const NewsArticle = (props: article) => {
 
     return (
 
-        <div className="article">
+        <div id={props.id} className="article">
             <img src={imageUrl} />
             <h2>{title}</h2>
             <div>
