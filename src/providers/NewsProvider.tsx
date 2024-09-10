@@ -34,7 +34,8 @@ const NewsProvider = ({ children }: any) => {
                     ]
                 },
                 "$filter": {
-                    "forceMaxDataTimeWindow": "31"
+                    "forceMaxDataTimeWindow": "31",
+                    "isDuplicate": "skipDuplicates"
                 }
             },
             "resultType": "articles",
@@ -42,35 +43,38 @@ const NewsProvider = ({ children }: any) => {
             "includeArticleEventUri": false,
             "includeArticleLocation": true,
             "includeArticleImage": true,
-            "apiKey": import.meta.env.VITE_NEWS_KEY
+            "apiKey": "0d6f99c5-3e66-4108-bc88-a70520bbd937"
         };
 
-        axios.post("https://www.newsapi.ai/api/v1/article/getArticles", data)
-            .then((response) => {
-                const arrayOfArticles = response.data.articles.results;
-
-                for (let i = 0; i < arrayOfArticles.length; i++) {
-                    const articleData: NewsData = {
-                        title: arrayOfArticles[i].title,
-                        body: arrayOfArticles[i].body,
-                        imageUrl: arrayOfArticles[i].image,
-                    };
-
-                    setNewsData((prevNewsData) => prevNewsData ? [...prevNewsData, articleData] : [articleData]);
-                }
-
-                console.log(response.data);
-            })
-            .catch((error) => console.log(error));
-
+        /*  axios.post("https://www.newsapi.ai/api/v1/article/getArticles", data)
+             .then((response) => {
+                 let arrayOfArticles = response.data.articles.results;
+ 
+                 if (arrayOfArticles && arrayOfArticles) {
+ 
+ 
+                     const articlesToSet = arrayOfArticles.slice(0, 7).map((article: any) => ({
+                         title: article.title,
+                         body: article.body,
+                         imageUrl: article.image,
+                     }));
+                     setNewsData(articlesToSet);
+ 
+ 
+                 }
+ 
+                 console.log(response.data);
+             })
+             .catch((error) => console.log(error));
+  */
 
 
     }, []);
-
-    useEffect(() => {
-        if (newsData)
-            console.log(`testing ${newsData[4].title}`)
-    }, [newsData]);
+    /* 
+        useEffect(() => {
+            if (newsData)
+                console.log(`testing ${newsData[4].title}`)
+        }, [newsData]); */
 
 
 

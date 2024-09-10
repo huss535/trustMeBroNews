@@ -5,6 +5,7 @@
   top: 0;
   right: 0;
   left: 0;
+  z-index: 3;
 
 }
 
@@ -30,7 +31,7 @@ nav img {
 
 .page-body {
   display: grid;
-  row-gap: 30px;
+  row-gap: 60px;
   justify-items: flex-start;
   grid-template-columns: 1fr 1fr;
   grid-template-areas: "header header";
@@ -57,23 +58,71 @@ nav img {
 
 }
 
+.article-container {
+  position: relative;
+  perspective: 1000px;
+  width: 450px;
+  height: 800px;
+
+}
 
 .article {
+
+  height: 100%;
+  width: 100%;
+  transform-style: preserve-3d;
+  transition: transform 1.9s ease;
+}
+
+.article-front,
+.article-back {
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.6);
+
+  position: absolute;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  width: 450px;
-  height: 500px;
-  /* Add some height for the article to be visible */
+  justify-content: center;
+  padding: 20px;
+  backface-visibility: hidden;
+}
+
+.article-front {
+  background-color: #fff;
+  transform: translateZ(40px);
 
 }
 
-.article img {
+.article-back {
+  background-color: #d9534f;
+  transform: translateZ(0px) rotateY(180deg);
+}
+
+.article-side {
+  position: absolute;
+  width: 40px;
+  background-color: #d9bda5;
+  left: 0;
+  top: 0;
+  bottom: -40px;
+  transform-origin: left;
+  transform: translateZ(40px) rotateY(90deg);
+}
+
+
+.article:hover {
+
+  transform: rotateY(180deg);
+}
+
+.article-front img {
   width: 100%;
-  height: 60%;
+  height: 40%;
   border-radius: 4px;
 }
+
 
 p {
   line-height: 4;
@@ -162,6 +211,7 @@ h1 {
 .true-button,
 .fake-button {
   font: inherit;
+  font-weight: 500;
   overflow: hidden;
   position: relative;
   color: black;
@@ -171,6 +221,7 @@ h1 {
   border-width: 1.4px;
   background-color: inherit;
   transition: 0.5s;
+  z-index: 0;
 
 }
 
@@ -183,7 +234,7 @@ h1 {
   right: 0;
   position: absolute;
   content: "";
-  z-index: -1;
+  z-index: -2;
   transition: 0.3s;
 }
 
