@@ -2,8 +2,8 @@ const TopBar = () => {
 
 
     return (
-        <nav className="nav-bar">
-            <img src="src/assets/TrustMeBro.svg" />
+        <nav id="nav-bar">
+            <img src="src/assets/foxedNews.png" />
         </nav>
     );
 }

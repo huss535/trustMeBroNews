@@ -6,9 +6,5 @@ interface NewsData {
 }
 
 
-interface newsContextType {
-    articles: NewsData[],
-    getArticles: () => void,
-}
 
 export default NewsData;

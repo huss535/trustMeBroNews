@@ -17,6 +17,7 @@ const NewsPage = () => {
                         title="Yes this is a trial"
                         imageUrl="Notworking"
                         isReal={true}
+                        id="1"
                     />
                     {/*  {data && data.length > 0 ? (
                         data.map((article, index) => (
