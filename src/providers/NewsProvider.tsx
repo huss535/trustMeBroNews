@@ -9,9 +9,10 @@ const NewsProvider = ({ children }: any) => {
 
     useEffect(() => {
         const backendServer = import.meta.env.VITE_BACKEND;
-        console.log(backendServer + "/getArticles")
-        axios.get(backendServer + "/getArticles").then((response) => {
+        console.log(backendServer + "/articles")
+        axios.get(backendServer + "/articles").then((response) => {
             console.log(response.data);
+            setNewsData(response.data);
         }).catch((error) => {
             console.log(error);
         })

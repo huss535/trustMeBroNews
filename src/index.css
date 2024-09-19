@@ -1,12 +1,9 @@
 body {
 
   background-color: #E3E3E3;
-  font-family: "Inter", sans-serif;
-  font-size: 20px;
-  font-family: "Noto Serif", serif;
-  font-optical-sizing: auto;
+
+
+  font-family: "Merriweather", serif;
   font-weight: 400;
   font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
 }

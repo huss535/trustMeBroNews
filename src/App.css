@@ -12,8 +12,9 @@
 #nav-bar::before {
   content: "";
   display: block;
-  background-color: darkred;
-  height: 20px;
+  background-color: #e83343;
+  ;
+  height: 10px;
   width: 100vw;
 }
 
@@ -22,18 +23,11 @@ nav img {
   border-radius: 15px;
   width: 150px;
   height: 150px;
-  margin-inline-start: 30px;
+  margin-top: 0.5rem;
+  margin-inline-start: 3rem;
 }
 
-#intro-body {
-  margin-top: 9rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
+
 
 #intro-body p {
 
@@ -43,110 +37,87 @@ nav img {
 
 }
 
-#center-div {
+.center-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  min-height: 150vh;
+  margin: 2rem;
+  text-align: left;
+}
+
+.center-grid {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 2rem;
 }
 
 .page-body {
+  padding: 5rem;
   display: grid;
-  row-gap: 60px;
-  justify-items: flex-start;
-  grid-template-columns: 1fr 1fr;
+  row-gap: 15rem;
+  justify-content: space-between;
+  justify-items: stretch;
+  grid-template-columns: 600px 600px;
   grid-template-areas: "header header";
-  width: 80%;
+  width: 70vw;
   margin-top: 200px;
   text-align: center;
 }
 
+/* .grid-flex-end {
+  background-color: #013366;
+  justify-items: stretch;
+
+} */
+
+
 #article-header {
-  width: auto;
+  width: 99%;
+  height: 450px;
   grid-area: header;
   flex-direction: row;
+  justify-content: space-between;
 
 }
 
-#article-header div {
+/* #article-header div {
   display: flex;
 }
-
+ */
 #article-header img {
 
-  width: 40%;
-  height: 80%;
+  width: 50%;
+  height: 100%;
 
 }
 
-.article-container {
-  position: relative;
-  perspective: 1000px;
-  width: 450px;
-  height: 800px;
 
-}
+
 
 .article {
-
-  height: 100%;
-  width: 100%;
-  transform-style: preserve-3d;
-  transition: transform 1.9s ease;
-}
-
-.article-front,
-.article-back {
+  border-radius: 10px;
   box-shadow: 0 20px 30px rgba(0, 0, 0, 0.6);
-  position: absolute;
-  width: 100%;
-  height: 100%;
+  /*   width: 450px;
+ */
+  height: 800px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   padding: 20px;
   backface-visibility: hidden;
 }
 
-.article-front {
-  background-color: #fff;
-  transform: translateZ(40px);
 
-}
-
-.article-back {
-  background-color: #d9534f;
-  transform: translateZ(0px) rotateY(180deg);
-}
-
-.article-side {
-
-  position: absolute;
-  width: 40px;
-  background-color: #d9bda5;
-  left: 0;
-  top: 0;
-  bottom: -40px;
-  transform-origin: left;
-  transform: translateZ(40px) rotateY(90deg);
-}
-
-
-/* .article:hover {
-
-  transform: rotateY(180deg);
-} */
-
-.article-clicked {
-  transform: rotateY(180deg);
-
-
-}
-
-.article-front img {
+.article img {
   width: 100%;
-  height: 40%;
+  height: 50%;
   border-radius: 4px;
+  object-fit: cover;
 }
 
 
@@ -210,6 +181,8 @@ h1 {
   height: 0%;
   bottom: 0;
   right: 0;
+  left: 0;
+  margin: 0;
   position: absolute;
   content: "";
   z-index: -2;
@@ -256,3 +229,82 @@ h1 {
   color: #E3E3E3;
   background-color: #C20017;
 } */
+
+#article-body h1,
+#intro-body h1 {
+  position: relative;
+  font-size: 4rem;
+
+}
+
+#article-body h1::after,
+#intro-body h1::after {
+  position: absolute;
+  bottom: 0;
+  top: 60%;
+  content: "";
+  left: 0;
+  right: 0;
+  width: 100%;
+  background-color: #e83343;
+  z-index: -5;
+}
+
+#article-body h2 {
+
+  font-size: 2.5rem;
+
+}
+
+#article-body img {
+  object-fit: cover;
+
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.11),
+    0 2px 2px rgba(0, 0, 0, 0.11),
+    0 4px 4px rgba(0, 0, 0, 0.11),
+    0 8px 8px rgba(0, 0, 0, 0.11),
+    0 16px 16px rgba(0, 0, 0, 0.11),
+    0 32px 32px rgba(0, 0, 0, 0.11);
+
+}
+
+#article-body p {
+  width: 80%;
+  line-height: 2.5rem;
+}
+
+#article-body hr {
+  position: absolute;
+  width: 80vw;
+}
+
+p {
+  font-size: 1.5rem;
+}
+
+
+.article a {
+  text-decoration: none;
+
+  font-size: 2rem;
+  transition: background-position 0.5s ease;
+  background-image: linear-gradient(to right,
+      #3457D5,
+      #3457D5 50%,
+      #000 50%);
+
+  background-position: -100%;
+
+  background-size: 200% 100%;
+  /* Make the background twice as wide */
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+.article a:hover {
+  background-position: 0;
+  /* Shift the gradient to reveal red on hover */
+}

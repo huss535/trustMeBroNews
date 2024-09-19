@@ -4,26 +4,38 @@ interface article {
     title: string,
     isReal: boolean,
     id?: string
+    className?: string
 }
 
 
 
 
 const NewsArticle = (props: article) => {
-    const { imageUrl, title, isReal, id } = props;
+    const { imageUrl, title, isReal, id, className } = props;
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
 
         if (id) {
-
+            const component = document.getElementById(id);
             const buttonTitle = (e.currentTarget as HTMLButtonElement).textContent;
-            if (buttonTitle == "Go Back") {
+            if (buttonTitle == "Go Back" && component) {
 
-                document.getElementById(id)?.classList.remove("article-clicked");
+                component.classList.remove("article-clicked");
+                component.classList.remove("article-back-real");
+                component.classList.remove("article-back-fake");
 
-            } else {
+            } else if (component) {
+                const backOfCard = component.querySelector(".article-back");
 
-                document.getElementById(id)?.classList.add("article-clicked");
+                if (isReal && backOfCard) {
+                    backOfCard.classList.add("article-back-real");
+
+                } else if (backOfCard) {
+                    backOfCard.classList.add("article-back-fake");
+                }
+                component.classList.add("article-clicked");
+
+
 
             }
 
@@ -38,28 +50,27 @@ const NewsArticle = (props: article) => {
     }
 
     return (
-        <div className="article-container">
-            <div id={props.id} className="article">
+        <div id={props.id} className={`article ${className}`}>
 
-                <div className="article-front">
-                    <img src={imageUrl} />
-                    <h2>{title}</h2>
-                    <div>
-                        <button onClick={handleClick} className="article-button fake-button">Fake</button>
-                        <button onClick={handleClick} className="article-button true-button">Real</button>
-                    </div>
 
-                </div>
-                <div className="article-side"></div>
+            <img src={imageUrl} />
+            <a href="">{title}</a>
+            <div>
+                <button onClick={handleClick} className="article-button fake-button">Fake</button>
+                <button onClick={handleClick} className="article-button true-button">Real</button>
 
-                <div className="article-back">
-
-                    <button onClick={handleClick} className="main-button">Go Back</button>
-
-                </div>
 
             </div>
+
+
+
+
+            {/*   <button onClick={handleClick} className="main-button">Go Back</button>
+
+               */}
+
         </div>
+
 
 
     );

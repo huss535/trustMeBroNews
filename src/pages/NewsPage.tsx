@@ -9,28 +9,31 @@ const NewsPage = () => {
     console.log(data);
     return (
         <>
-            <TopBar />
-            <div id="center-div">
+            <div className="center-grid">
                 <div className="page-body">
-                    <NewsArticle
-                        key={1}
-                        title="Yes this is a trial"
-                        imageUrl="Notworking"
-                        isReal={true}
-                        id="1"
-                    />
-                    {/*  {data && data.length > 0 ? (
-                        data.map((article, index) => (
-                            <NewsArticle
-                                key={index}
-                                title={article.title}
-                                imageUrl={article.imageUrl}
-                                isReal={true}
-                            />
-                        ))
+                    {data && data.length > 0 ? (
+                        data.map((article, index) =>
+                            index === 0 ? (
+                                <NewsArticle
+                                    key={index}
+                                    title={article.title}
+                                    imageUrl={article.imageUrl}
+                                    isReal={true}
+                                    id="article-header"
+                                />
+                            ) : (
+                                <NewsArticle
+                                    key={index}
+                                    id={`${index}`}
+                                    title={article.title}
+                                    imageUrl={article.imageUrl}
+                                    isReal={true}
+                                />
+                            )
+                        )
                     ) : (
                         <p>No news available</p>
-                    )} */}
+                    )}
                 </div>
             </div>
         </>
