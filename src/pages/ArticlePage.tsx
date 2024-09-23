@@ -1,31 +1,52 @@
-import React from 'react';
 import { useLocation } from 'react-router-dom';
-import TopBar from '../components/TopBar';
+import NewsData, { Author } from '../types/News';
+
+
+const formatBodyContent = (body: string) => {
+    // Split body text by double newlines for paragraphs
+    const paragraphs = body.split(/\n{2,}/).filter(paragraph => paragraph.trim() !== "");
+
+    return paragraphs.map((paragraph, index) => (
+        <p key={index}>{paragraph}</p>
+    ));
+};
+
+const processAuthors = (authors: Author[]) => {
+    return authors.filter((author) => author.name !== "http" && author.name !== "https");
+};
 
 const ArticlePage = () => {
     const location = useLocation();
     /*     const { title, body, imageUrl, source, date } = location.state || {};  // Destructure the state
      */
-    const { title, body, imageUrl, source, date } = {
-        title: "Trump on rampage in New York city",
-
-        body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt laborum eum accusantium maiores, deleniti non. Atque molestias nobis dolorem quam dolor quasi ullam similique recusandae incidunt ratione quae, suscipit eum?,Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt laborum eum accusantium maiores, deleniti non. Atque molestias nobis dolorem quam dolor quasi ullam similique recusandae incidunt ratione quae, suscipit eum?,Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt laborum eum accusantium maiores, deleniti non. Atque molestias nobis dolorem quam dolor quasi ullam similique recusandae incidunt ratione quae, suscipit eum?,Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt laborum eum accusantium maiores, deleniti non. Atque molestias nobis dolorem quam dolor quasi ullam similique recusandae incidunt ratione quae, suscipit eum?,Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt laborum eum accusantium maiores, deleniti non. Atque molestias nobis dolorem quam dolor quasi ullam similique recusandae incidunt ratione quae, suscipit eum?",
-
-        imageUrl: "https://media-cldnry.s-nbcnews.com/image/upload/t_fit-1240w,f_auto,q_auto:best/newscms/2016_49/1825346/161208-trump-wrestling-mn-1056.jpg",
-        source: "The Washington Post",
-        date: "19/03/2001"
-    };  // Destructure the state
+    const { state } = location;
+    const newsData = state as NewsData;
+    const authors: Author[] = processAuthors(newsData.authors);
 
     return (
         <div id='article-body' className='center-div'>
 
-            <h1>{title || 'No Title Provided'}</h1>
-            <h2>{source || 'No Source Provided'}<hr /></h2><br />
+            <h1>{newsData.title || 'No Title Provided'}</h1>
 
-            {imageUrl && <img src={imageUrl} alt={`${title} image`} />}
+            {newsData.source ? <><h2>Source: {newsData.source.title}</h2>
 
-            <h3>{date || 'No Date Provided'}</h3>
-            <p>{body || 'No Body Content'}</p>
+            </> : null}
+
+            {authors.length > 0 ? <> <h2>Author(s): {authors.map(author => author.name).join(', ')}</h2>   </> : null}
+
+            <br />
+
+            {newsData.imageUrl && <img src={newsData.imageUrl} alt={`${newsData.title} image`} />}
+
+            <h3>{newsData.date.toString() || 'No Date Provided'}</h3>
+
+
+            {newsData.body ? (
+
+                formatBodyContent(newsData.body)
+            ) : (
+                <p>No Body Content</p>
+            )}
         </div>
     );
 }

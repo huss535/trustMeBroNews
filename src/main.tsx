@@ -6,11 +6,9 @@ import { BrowserRouter } from 'react-router-dom'
 import NewsProvider from './providers/NewsProvider.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <NewsProvider>
-        <App />
-      </NewsProvider>
-    </BrowserRouter>
-  </React.StrictMode>,
+  <BrowserRouter>
+    <NewsProvider>
+      <App />
+    </NewsProvider>
+  </BrowserRouter>
 )

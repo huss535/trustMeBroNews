@@ -1,80 +1,72 @@
+import { useNavigate } from "react-router-dom";
+import NewsData from "../types/News";
+import { useState } from "react";
 
-interface article {
-    imageUrl: string,
-    title: string,
-    isReal: boolean,
-    id?: string
-    className?: string
+interface ArticleProps {
+    newsData: NewsData;
+    id?: string;
+    className?: string;
 }
 
+const NewsArticle = (props: ArticleProps) => {
+    const { newsData, id, className } = props;
+    const navigate = useNavigate();
+    const [isOverlayVisible, setOverlayVisible] = useState(false);
+    const [isRealButton, setIsRealButton] = useState(false);
 
-
-
-const NewsArticle = (props: article) => {
-    const { imageUrl, title, isReal, id, className } = props;
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-
-        if (id) {
-            const component = document.getElementById(id);
-            const buttonTitle = (e.currentTarget as HTMLButtonElement).textContent;
-            if (buttonTitle == "Go Back" && component) {
-
-                component.classList.remove("article-clicked");
-                component.classList.remove("article-back-real");
-                component.classList.remove("article-back-fake");
-
-            } else if (component) {
-                const backOfCard = component.querySelector(".article-back");
-
-                if (isReal && backOfCard) {
-                    backOfCard.classList.add("article-back-real");
-
-                } else if (backOfCard) {
-                    backOfCard.classList.add("article-back-fake");
-                }
-                component.classList.add("article-clicked");
-
-
-
-            }
-
-
-
-
-
+        if (e.currentTarget.name == "real") {
+            setIsRealButton(true);
+        } else {
+            setIsRealButton(false);
         }
 
+        setOverlayVisible(true);
+    };
 
+    const handleGoBack = () => {
+        setOverlayVisible(false);
+    };
 
-    }
+    const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault();
+        navigate("/article", { state: newsData });
+    };
 
     return (
-        <div id={props.id} className={`article ${className}`}>
-
-
-            <img src={imageUrl} />
-            <a href="">{title}</a>
+        <div id={id} className={`article ${className}`}>
+            <img src={newsData.imageUrl} alt={newsData.title} />
+            <a onClick={handleNavigation}>{newsData.title}</a>
             <div>
-                <button onClick={handleClick} className="article-button fake-button">Fake</button>
-                <button onClick={handleClick} className="article-button true-button">Real</button>
-
-
+                <button name="fake" onClick={handleClick} className="main-button">
+                    Fake
+                </button>
+                <button name="real" onClick={handleClick} className="main-button">
+                    Real
+                </button>
             </div>
 
+            <div className={`article-overlay ${isOverlayVisible ? 'visible' : ''}`}>
+                {/* Conditional Rendering */}
+                {newsData.isReal ? (
+                    isRealButton ? (
+                        <h1>Good job, this is indeed true!</h1>  // Correct, Real article and Real button clicked
+                    ) : (
+                        <h1>No, this is in fact real!</h1> // Wrong, Real article but Fake button clicked
+                    )
+                ) : (
+                    !isRealButton ? (
+                        <h1>Good job, this is indeed fake!</h1> // Correct, Fake article and Fake button clicked
+                    ) : (
+                        <h1>No, this is actually fake!</h1> // Wrong, Fake article but Real button clicked
+                    )
+                )}
 
-
-
-            {/*   <button onClick={handleClick} className="main-button">Go Back</button>
-
-               */}
-
+                <button onClick={handleGoBack} className="main-button">Go Back</button>
+            </div>
         </div>
-
-
-
     );
 }
-
 
 export default NewsArticle;

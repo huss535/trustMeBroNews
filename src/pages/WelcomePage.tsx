@@ -12,6 +12,7 @@ const WelcomePage = () => {
     return (
         <div id="intro-body" className="center-div">
 
+            <img src="src/assets/foxedNews.png" />
 
             <h1>Disclaimer</h1>
 
